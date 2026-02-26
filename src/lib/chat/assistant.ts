@@ -42,15 +42,20 @@ type RunAssistantParams = {
 };
 
 function mapHistoryToInput(history: ConversationMessage[]) {
-  return history.map((item) => ({
-    role: item.role,
-    content: [
-      {
-        type: "input_text" as const,
-        text: item.content,
-      },
-    ],
-  }));
+  return history
+    .filter(
+      (item): item is ConversationMessage & { role: "user" } =>
+        item.role === "user",
+    )
+    .map((item) => ({
+      role: "user" as const,
+      content: [
+        {
+          type: "input_text" as const,
+          text: item.content,
+        },
+      ],
+    }));
 }
 
 function readResponseText(response: unknown) {
