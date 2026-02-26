@@ -185,18 +185,16 @@ const toolDefinitions: ToolDefinition[] = [
           description: "Data final no formato YYYY-MM-DD.",
         },
         codfilial: {
-          oneOf: [
-            { type: "integer" },
-            { type: "array", items: { type: "integer" } },
-          ],
-          description: "Filial (aceita 1, 3 ou 4).",
+          type: "array",
+          items: { type: "integer" },
+          description:
+            "Lista de filiais (aceita 1, 3 ou 4). Para uma filial unica, envie lista com um item, ex: [3].",
         },
         codfornec: {
-          oneOf: [
-            { type: "integer" },
-            { type: "array", items: { type: "integer" } },
-          ],
-          description: "Codigo numerico do fornecedor.",
+          type: "array",
+          items: { type: "integer" },
+          description:
+            "Lista de codigos de fornecedor. Para um unico codigo, envie lista com um item, ex: [117].",
         },
         fornecedor: {
           type: "string",
