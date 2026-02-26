@@ -257,7 +257,7 @@ export function listToolsForRole(role: Role) {
     name: tool.name,
     description: tool.description,
     parameters: tool.parameters,
-    strict: true,
+    strict: false,
   }));
 }
 
