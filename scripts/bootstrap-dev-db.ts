@@ -84,27 +84,38 @@ async function seedData() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  await prisma.dailyRevenue.deleteMany({
-    where: { scopeCode: "loja-sp", date: today },
+  await prisma.dailyRevenue.upsert({
+    where: { id: "rev-bombril-today" },
+    update: {
+      scopeCode: "loja-sp",
+      product: "bombril",
+      amount: 12450.3,
+      date: today,
+    },
+    create: {
+      id: "rev-bombril-today",
+      scopeCode: "loja-sp",
+      product: "bombril",
+      amount: 12450.3,
+      date: today,
+    },
   });
 
-  await prisma.dailyRevenue.createMany({
-    data: [
-      {
-        id: "rev-bombril-today",
-        scopeCode: "loja-sp",
-        product: "bombril",
-        amount: 12450.3,
-        date: today,
-      },
-      {
-        id: "rev-esponja-today",
-        scopeCode: "loja-sp",
-        product: "esponja",
-        amount: 3020.15,
-        date: today,
-      },
-    ],
+  await prisma.dailyRevenue.upsert({
+    where: { id: "rev-esponja-today" },
+    update: {
+      scopeCode: "loja-sp",
+      product: "esponja",
+      amount: 3020.15,
+      date: today,
+    },
+    create: {
+      id: "rev-esponja-today",
+      scopeCode: "loja-sp",
+      product: "esponja",
+      amount: 3020.15,
+      date: today,
+    },
   });
 }
 
